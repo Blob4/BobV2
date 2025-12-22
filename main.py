@@ -378,8 +378,7 @@ i dont think this is necessary but i guess its here, empty for now because why n
 
 @tree.command(name='monkeysong', description='facilitates access to peak literature')
 async def monkey(interaction: discord.Interaction):
-    await interaction.response.send_message(file=discord.File(open('D:\\Documents\BobV2\\monkey_song_1 (1).mp4', 'rb'), spoiler=False), tts=True)
-
+    await interaction.response.send_message(file=discord.File(open(f'{os.getcwd}/monkey_song_1 (1).mp4', 'rb'), spoiler=False), tts=True)
 
 
     
