@@ -95,7 +95,7 @@ youtube = YoutubeUtils(ytkey=YT_API_KEY)
 q: Queue = Queue(YT_API_KEY)
 emojiList = [':mid:', ':bald:', ':hehe:', ':mods:', ':Jack:', ':hampter:']
 bobmemory = [{'role': 'system', 'content': prompt_mean_bob}]
-msgauthorcache: discord.Member
+msgauthorcache: discord.Member = None
 
 
 
