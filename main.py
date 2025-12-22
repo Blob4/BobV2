@@ -298,7 +298,7 @@ async def on_ready():
 #BLUEPRINT FOR COMMANDS
 @tree.command(name='ping', description='pings Bob, mainly for debugging') #this is a decorator, whatever that means. basically just copy this but change name and description to whatever you want user to see
 async def ping(interaction: discord.Interaction): #this is the actual function that does everything, this first arg is mandatory but any others add args to the command, e.g song for play command
-    await interaction.response.send_message(content='pong', tts=True, ephemeral=False) #this is the response that is sent to the user, just hover over the function it has good explanations for args
+    await interaction.response.send_message(content='pong', tts=False, ephemeral=False) #this is the response that is sent to the user, just hover over the function it has good explanations for args
     await interaction.channel.send('pong') #this is how to send a message outside of the command response (normal message) when command runs, using discord.Interaction object. probably useless 
 #anything not covered in this command is commented in play command below
 
