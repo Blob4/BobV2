@@ -256,7 +256,7 @@ async def on_message(message: Message):
     #user_message is the actual message (string), message is the Message object
     user_message = message.content
     if random_chance(10):
-        if random_chance(50):
+        if random_chance(100):
             await message.add_reaction(random_emoji(1)[0])
         else:
             random.shuffle(emojiList)
