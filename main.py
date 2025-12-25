@@ -263,7 +263,7 @@ async def on_message(message: Message):
             await message.channel.send(emojiList[0])
     if random_chance(5):
         await message.channel.send(retrieve_gif(message, 10))
-    if random_chance(2):
+    if random_chance(1):
         await message.channel.send(get_response(message, user_message, True))
     for member in message.mentions:
         if member:
@@ -352,7 +352,6 @@ async def skip(interaction: discord.Interaction):
     else:
         await vc.disconnect()
     
-
 @tree.command(name='queue', description='displays the whole music queue')
 async def queue(interaction: discord.Interaction):
     global q
@@ -366,15 +365,11 @@ async def queue(interaction: discord.Interaction):
     else:
         await interaction.response.send_message(content='Queue is currently empty.', ephemeral=True)
 
-
-
 @tree.command(name='help', description='ill let you guess')
 async def help(interaction: discord.Interaction):
     await interaction.response.send_message(content='''
 i dont think this is necessary but i guess its here, empty for now because why not.
 ''', ephemeral=True)
-
-
 
 @tree.command(name='monkeysong', description='facilitates access to peak literature')
 async def monkey(interaction: discord.Interaction):
