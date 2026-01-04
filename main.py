@@ -295,6 +295,14 @@ async def on_ready():
     await tree.sync()
     print('running')
 
+@client.event
+async def on_voice_state_update(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+    global q
+    if member == client.user and after.channel == None:
+        q.queuelist = []
+
+
+
 #BLUEPRINT FOR COMMANDS
 @tree.command(name='ping', description='pings Bob, mainly for debugging') #this is a decorator, whatever that means. basically just copy this but change name and description to whatever you want user to see
 async def ping(interaction: discord.Interaction): #this is the actual function that does everything, this first arg is mandatory but any others add args to the command, e.g song for play command
