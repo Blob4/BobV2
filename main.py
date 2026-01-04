@@ -140,13 +140,15 @@ def get_response(message: Message, user_message: str, isGPT: bool):
                     return str(chat_response)                       
                 else:   
                     print("No valid choices or message content.")
-                    chat_response = "No response."
             
 
         except Exception as e:
             print(e)
             print('''-----------------------------------------
                   error above, probably smth with the api key''')
+    
+    else:
+        return
     #--------------------------------------------------------------------------
 
 
@@ -278,7 +280,8 @@ async def on_message(message: Message):
 
     try:
         response = get_response(message, user_message, False)
-        await message.channel.send(response)
+        if response:
+            await message.channel.send(response)
     except Exception as e:
         print(e)
         print('error above, something with the message')
