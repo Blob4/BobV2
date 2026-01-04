@@ -311,11 +311,13 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
     print('effect detected')
     global vc
-    if discord.PartialEmoji.from_str(':moyai:') == effect.emoji:
+    if effect.sound.id == 1213777673579528234:
         print('moyai detected')
+    else:
+        print()
     if effect.is_sound():
         print('sound detected')
-    if discord.PartialEmoji.from_str(':moyai:') == effect.emoji and effect.is_sound():
+    if effect.sound.id == 1213777673579528234 and effect.is_sound():
         print('leaving vc due to execution by firing squad')
         await vc.disconnect()
 
