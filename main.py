@@ -295,8 +295,11 @@ async def on_ready():
     await tree.sync()
     print('running')
 
+
+
 @client.event
 async def on_voice_state_update(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+    print('voicestate change detected')
     global q
     global task
     if member == client.user and after.channel == None:
@@ -306,6 +309,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
 
 @client.event
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
+    print('effect detected')
     global vc
     if discord.PartialEmoji.from_str(':moyai:') == effect.emoji and effect.is_sound():
         print('leaving vc due to execution by firing squad')
