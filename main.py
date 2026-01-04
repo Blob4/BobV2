@@ -223,7 +223,7 @@ async def queue_loop(vc: discord.VoiceClient, interaction: discord.Interaction):
     global q
     global task
     task = asyncio.create_task(asyncio.sleep(q.queuelist[0].get('duration')))
-    await interaction.channel.send(f'Now Playing: {q.queuelist[0].get('yt')} | Duration: {q.queuelist[0].get('duration')}')
+    await interaction.channel.send(f'Now Playing: {q.queuelist[0].get('yt')} | Duration: {convert_seconds(q.queuelist[0].get('duration'))}')
     try:
         await play_audio(vc, q.queuelist[0].get('url'))
     except Exception as e:
