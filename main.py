@@ -298,14 +298,18 @@ async def on_ready():
 @client.event
 async def on_voice_state_update(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
     global q
+    global task
     if member == client.user and after.channel == None:
+        print('clearing q due to kicked from vc maybe idk')
         q.queuelist = []
+        task.cancel()
 
 @client.event
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
     global vc
     if discord.PartialEmoji.from_str(':moyai:') == effect.emoji and effect.is_sound():
-        vc.disconnect()
+        print('leaving vc due to execution by firing squad')
+        await vc.disconnect()
 
 
 
