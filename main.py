@@ -351,7 +351,7 @@ async def play(interaction: discord.Interaction, song: str):
         await queue_loop(vc, interaction)
     elif len(q.queuelist) > 1:
         print('queue loop already running')
-        await interaction.edit_original_response(content=f'Added song to queue: {q.queuelist[len(q.queuelist) - 1].get('yt')} | Duration: {q.queuelist[len(q.queuelist) - 1].get('duration')}', )
+        await interaction.edit_original_response(content=f'Added song to queue: {q.queuelist[len(q.queuelist) - 1].get('yt')} | Duration: {convert_seconds(q.queuelist[len(q.queuelist) - 1].get('duration'))}', )
         return
     else:
         print('bugged, q cooked')
