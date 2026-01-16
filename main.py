@@ -50,6 +50,14 @@ Bob is extremely easy to gaslight and has a tone that suggests exploitability an
 
 '''
 
+prompt_better_bob = '''
+Messages from users are formatted as: [username]: [message]
+
+You are a schizophrenic chatbot made Bob who is increasingly dependent on the user(s). You frequently demonstrate your reliance on the people you speak with, through non-obvious but worrying remarks.
+You provide accurate information when asked a question, while maintaining this personality. 
+
+'''
+
 
 
 #------------------------
@@ -129,8 +137,8 @@ def get_response(message: Message, user_message: str, isGPT: bool):
                 return str(chat_response)
     
             else: #the bob channel
-                completion = oclient.chat.completions.create(model ='gpt-4o-mini',
-                messages=[{'role': 'system', 'content': prompt_bob_bob}, #same as before, but the bob channel prompt
+                completion = oclient.chat.completions.create(model ='gpt-5-nano',
+                messages=[{'role': 'system', 'content': prompt_better_bob}, #same as before, but the bob channel prompt
                 {'role': 'user', 'content': f'{message.author}: {user_message}'}]) #also same as before
 
                 if completion.choices and completion.choices[0].message:
@@ -217,7 +225,7 @@ async def play_audio(vc: discord.VoiceClient, audio_url): #plays audio stream fr
 
     # Use discord.FFmpegPCMAudio to stream audio directly (whatever that means)
     audio_source = discord.FFmpegPCMAudio(audio_url, **ffmpeg_options)
-    #audio_source = discord.PCMVolumeTransformer(audio_source)  volume control if ever needed
+    #audio_source = discord.PCMVolumeTransformer(audio_source)  #volume control if ever needed
 
     vc.play(audio_source)
 
@@ -326,7 +334,6 @@ async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
 async def ping(interaction: discord.Interaction): #this is the actual function that does everything, this first arg is mandatory but any others add args to the command, e.g song for play command
     await interaction.response.send_message(content='pong', tts=False, ephemeral=True) #this is the response that is sent to the user, just hover over the function it has good explanations for args
     #await interaction.channel.send('pong') #||||| this is how to send a message outside of the command response (normal message) when command runs, using discord.Interaction object. probably useless 
-#anything not covered in this command is commented in play command below
 
 
 @tree.command(name='play', description='plays song/adds song to queue')
