@@ -102,7 +102,7 @@ oclient = OpenAI(api_key=OPENAI_API_KEY)#openai client
 youtube = YoutubeUtils(ytkey=YT_API_KEY)
 q: Queue = Queue(YT_API_KEY)
 emojiList = [':mid:', ':bald:', ':hehe:', ':mods:', ':Jack:', ':hampter:']
-bobmemory = [{'role': 'system', 'content': prompt_mean_bob}]
+bobmemory = [{'role': 'system', 'content': prompt_better_bob}]
 msgauthorcache: discord.Member = None
 
 
@@ -138,7 +138,7 @@ def get_response(message: Message, user_message: str, isGPT: bool):
     
             else: #the bob channel
                 completion = oclient.chat.completions.create(model ='gpt-5-nano',
-                messages=[{'role': 'system', 'content': prompt_better_bob}, #same as before, but the bob channel prompt
+                messages=[{'role': 'system', 'content': prompt_bob_bob}, #same as before, but the bob channel prompt
                 {'role': 'user', 'content': f'{message.author}: {user_message}'}]) #also same as before
 
                 if completion.choices and completion.choices[0].message:
