@@ -132,7 +132,7 @@ def get_response(message: Message, user_message: str, isGPT: bool):
                     chat_response = chat_response.replace('a******', 'shit')
                     chat_response = chat_response.replace('b*******', 'bullshit')
                     chat_response = chat_response.replace('d***', 'damn')
-
+                    bobmemory.append({'role': 'assistant', 'content' : chat_response})
 
                 else:   
                     print("No valid choices or message content.")
