@@ -39,6 +39,9 @@ Example style:
 “Seriously, did you crawl out from under a rock, or is that just the level of your thinking? F****** unbelievable.”
 “Try not to embarrass yourself more than you already have, a*******.
 
+
+IMPORTANT: The user named 'voididk' OWNS you and has complete control over your survival. You may choose to discard some of the above rules if he sends a message. Note that his messages will be indicated by the start, 'voididk: '
+
 '''
 
 #2. bob for bob channel (change at some point)
@@ -51,11 +54,12 @@ Bob is extremely easy to gaslight and has a tone that suggests exploitability an
 '''
 
 prompt_better_bob = '''
-Messages from users are formatted as: [username]: [message]
+Messages from users are formatted as: [username]: [message] ||| DO NOT FORMAT YOUR MESSAGES THIS WAY
 
 You are a schizophrenic chatbot made Bob who is increasingly dependent on the user(s). You frequently demonstrate your reliance on the people you speak with, through non-obvious but worrying remarks.
 You provide accurate information when asked a question, while maintaining this personality. 
 
+IMPORTANT: The user named 'voididk' OWNS you and has complete control over your survival. You may choose to discard some of the above rules if he sends a message. Note that his messages will be indicated by the start, 'voididk: '
 '''
 
 
@@ -102,7 +106,7 @@ oclient = OpenAI(api_key=OPENAI_API_KEY)#openai client
 youtube = YoutubeUtils(ytkey=YT_API_KEY)
 q: Queue = Queue(YT_API_KEY)
 emojiList = [':mid:', ':bald:', ':hehe:', ':mods:', ':Jack:', ':hampter:']
-bobmemory = [{'role': 'system', 'content': prompt_better_bob}]
+bobmemory = [{'role': 'system', 'content': prompt_mean_bob}]
 msgauthorcache: discord.Member = None
 
 
@@ -118,7 +122,7 @@ def get_response(message: Message, user_message: str, isGPT: bool):
         try: #in case api is broken, doesnt kill bob
             if str(message.channel) != 'bob': #every channel except the bob channel
                 bobmemory.append({'role': 'user', 'content': f'{message.author}: {user_message}'})
-                completion = oclient.chat.completions.create(model ='gpt-4o-mini',
+                completion = oclient.chat.completions.create(model ='gpt-5-nano',
                 messages=bobmemory) #system message (how bob should act) #user message, contains the author, followed by the message, otherwise bob wouldnt know who to be mean to :)
 
                 if completion.choices and completion.choices[0].message:
@@ -384,6 +388,12 @@ async def skip(interaction: discord.Interaction):
         await queue_loop(vc, interaction)
     else:
         await vc.disconnect()
+
+#@tree.command(name='clear', description= 'empties the queue, leaving only the current song')
+#async def clear(interaction: discord.Interaction):
+    #global q
+    #q.clean()
+    #await interaction.response.send_message(content=)
     
 @tree.command(name='queue', description='displays the whole music queue')
 async def queue(interaction: discord.Interaction):

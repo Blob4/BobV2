@@ -106,3 +106,6 @@ class Queue:
     
     def clear(self):
         self.queuelist = []
+    
+    def clean(self):
+        self.queuelist = [self.queuelist[0]]
