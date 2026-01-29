@@ -389,11 +389,11 @@ async def skip(interaction: discord.Interaction):
     else:
         await vc.disconnect()
 
-#@tree.command(name='clear', description= 'empties the queue, leaving only the current song')
-#async def clear(interaction: discord.Interaction):
-    #global q
-    #q.clean()
-    #await interaction.response.send_message(content=)
+@tree.command(name='clear', description= 'empties the queue, leaving only the current song')
+async def clear(interaction: discord.Interaction):
+    global q
+    q.clean()
+    await interaction.response.send_message(content='Clearing Queue')
     
 @tree.command(name='queue', description='displays the whole music queue')
 async def queue(interaction: discord.Interaction):
