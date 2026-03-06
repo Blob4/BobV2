@@ -321,6 +321,7 @@ async def on_ready():
 @client.event
 async def on_voice_state_updatee(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
     print('voicestate change detected')
+    print("before:", before.channel, "after:", after.channel)
     global q
     global task
     if member == client.user and before.channel != None and after.channel == None:
