@@ -324,7 +324,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
         try:
             task.cancel()
         except Exception as e:
-            print(e)
+            pass
 
 @client.event
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
