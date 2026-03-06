@@ -313,8 +313,8 @@ async def on_ready():
 
 
 
-@client.event
-async def on_voice_state_update(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+#@client.event
+async def on_voice_state_updatee(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
     print('voicestate change detected')
     global q
     global task
@@ -325,6 +325,26 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
             task.cancel()
         except Exception as e:
             pass
+
+
+@client.event
+async def on_voice_state_update(member, before, after):
+    global q
+    global task
+
+    if member != client.user:
+        return
+
+    print("voicestate change detected")
+
+    # Only trigger when the bot actually leaves a channel
+    if before.channel is not None and after.channel is None:
+        print("Bot disconnected from VC, clearing queue")
+
+        q.queuelist = []
+
+        if task and not task.done():
+            task.cancel()
 
 @client.event
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
