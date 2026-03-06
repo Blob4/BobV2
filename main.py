@@ -108,6 +108,7 @@ q: Queue = Queue(YT_API_KEY)
 emojiList = [':mid:', ':bald:', ':hehe:', ':mods:', ':Jack:', ':hampter:']
 bobmemory = [{'role': 'system', 'content': prompt_mean_bob}]
 msgauthorcache: discord.Member = None
+task = None
 
 
 
