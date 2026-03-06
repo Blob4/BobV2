@@ -109,6 +109,7 @@ emojiList = [':mid:', ':bald:', ':hehe:', ':mods:', ':Jack:', ':hampter:']
 bobmemory = [{'role': 'system', 'content': prompt_mean_bob}]
 msgauthorcache: discord.Member = None
 task = None
+connecting = False
 
 
 
@@ -207,7 +208,11 @@ def random_chance(chance_percent: int): #easily randomisation chance thingo
 async def join(user: discord.Member):
     if (user.voice):
         channel = user.voice.channel
-        return await channel.connect()
+        if connecting == False:
+            connecting = True
+            goon = await channel.connect(reconnect=True)
+            connecting = False
+            return goon
     else:
         await user.send("You are not in a vc moron")
         return
@@ -313,7 +318,7 @@ async def on_ready():
 
 
 
-#@client.event
+@client.event
 async def on_voice_state_updatee(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
     print('voicestate change detected')
     global q
@@ -326,25 +331,6 @@ async def on_voice_state_updatee(member: discord.Member, before: discord.VoiceSt
         except Exception as e:
             pass
 
-
-@client.event
-async def on_voice_state_update(member, before, after):
-    global q
-    global task
-
-    if member != client.user:
-        return
-
-    print("voicestate change detected")
-
-    # Only trigger when the bot actually leaves a channel
-    if before.channel is not None and after.channel is None:
-        print("Bot disconnected from VC, clearing queue")
-
-        q.queuelist = []
-
-        if task and not task.done():
-            task.cancel()
 
 @client.event
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
