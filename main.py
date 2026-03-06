@@ -318,10 +318,13 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
     print('voicestate change detected')
     global q
     global task
-    if member == client.user and after.channel == None:
+    if member == client.user and before.channel != None and after.channel == None:
         print('clearing q due to kicked from vc maybe idk')
         q.queuelist = []
-        task.cancel()
+        try:
+            task.cancel()
+        except Exception as e:
+            print(e)
 
 @client.event
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
