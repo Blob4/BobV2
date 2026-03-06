@@ -110,6 +110,7 @@ bobmemory = [{'role': 'system', 'content': prompt_mean_bob}]
 msgauthorcache: discord.Member = None
 task = None
 connecting = False
+vc = None
 
 
 
