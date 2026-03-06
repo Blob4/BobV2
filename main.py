@@ -206,6 +206,7 @@ def random_chance(chance_percent: int): #easily randomisation chance thingo
         return False
 
 async def join(user: discord.Member):
+    global connecting
     if (user.voice):
         channel = user.voice.channel
         if connecting == False:
