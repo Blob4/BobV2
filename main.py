@@ -210,11 +210,8 @@ async def join(user: discord.Member):
     global connecting
     if (user.voice):
         channel = user.voice.channel
-        if connecting == False:
-            connecting = True
-            goon = await channel.connect(reconnect=True)
-            connecting = False
-            return goon
+        return await channel.connect(reconnect=True)
+        
     else:
         await user.send("You are not in a vc moron")
         return
