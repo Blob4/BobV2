@@ -109,8 +109,6 @@ emojiList = [':mid:', ':bald:', ':hehe:', ':mods:', ':Jack:', ':hampter:']
 bobmemory = [{'role': 'system', 'content': prompt_mean_bob}]
 msgauthorcache: discord.Member = None
 task = None
-connecting = False
-vc = None
 
 
 
@@ -207,11 +205,9 @@ def random_chance(chance_percent: int): #easily randomisation chance thingo
         return False
 
 async def join(user: discord.Member):
-    global connecting
     if (user.voice):
         channel = user.voice.channel
-        return await channel.connect(reconnect=True)
-        
+        return await channel.connect()
     else:
         await user.send("You are not in a vc moron")
         return
@@ -318,19 +314,14 @@ async def on_ready():
 
 
 @client.event
-async def on_voice_state_updatee(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+async def on_voice_state_update(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
     print('voicestate change detected')
-    print("before:", before.channel, "after:", after.channel)
     global q
     global task
-    if member == client.user and before.channel != None and after.channel == None:
+    if member == client.user and after.channel == None:
         print('clearing q due to kicked from vc maybe idk')
         q.queuelist = []
-        try:
-            task.cancel()
-        except Exception as e:
-            pass
-
+        task.cancel()
 
 @client.event
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
