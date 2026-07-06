@@ -271,6 +271,7 @@ async def on_message(message: Message):
             if message.author.name in data and 'txp' in data[message.author.name]:
                 data[message.author.name]['txp'] += xp
             else:
+                data[message.author.name] = {}
                 data[message.author.name]['txp'] = data[message.author.name].get('txp', 0) + TXP
 
             json.dump(data, levels)
@@ -348,6 +349,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
             if member.name in data and 'vxp' in data[member.name]:
                 data[member.name]['vxp'] += xp
             else:
+                data[member.name] = {}
                 data[member.name]['vxp'] = data[member.name].get('vxp', 0) + xp
 
             json.dump(data, levels)
