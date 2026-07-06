@@ -340,8 +340,8 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
 
 #person joins vc, for leveling
     elif before.channel == None and after.channel != None:
-        if member.name in VClevelsprogress.items():
-            VClevelsprogress[member.name] = time.time
+        VClevelsprogress[member.name] = time.time
+            
 #person leaves vc, for leveling
     elif before.channel != None and after.channel == None:
         xp = round((time.time - VClevelsprogress[member.name]) / VCXPSECONDS)
