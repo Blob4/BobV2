@@ -266,7 +266,7 @@ async def on_message(message: Message):
     global bobmemory
     global msgauthorcache
     
-    with open('/home/leon/PythonScripts/BobV2/BobV2', 'r+') as levels:
+    with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r+') as levels:
             data: dict = json.load(levels)
             if message.author.name in data and 'txp' in data[message.author.name]:
                 data[message.author.name]['txp'] += xp
@@ -344,7 +344,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
 #person leaves vc, for leveling
     elif before.channel != None and after.channel == None:
         xp = round((time.time - VClevelsprogress[member.name]) / VCXPSECONDS)
-        with open('/home/leon/PythonScripts/BobV2/BobV2', 'r+') as levels:
+        with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r+') as levels:
             data: dict = json.load(levels)
             if member.name in data and 'vxp' in data[member.name]:
                 data[member.name]['vxp'] += xp
