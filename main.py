@@ -269,7 +269,7 @@ async def on_message(message: Message):
     with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r+') as levels:
             data: dict = json.load(levels)
             if message.author.name in data and 'txp' in data[message.author.name]:
-                data[message.author.name]['txp'] += xp
+                data[message.author.name]['txp'] += TXP
             else:
                 data[message.author.name] = {}
                 data[message.author.name]['txp'] = data[message.author.name].get('txp', 0) + TXP
