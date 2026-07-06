@@ -353,7 +353,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
                 data[member.name] = {}
                 data[member.name]['vxp'] = data[member.name].get('vxp', 0) + xp
 
-        with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r') as levels:
+        with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'w') as levels:
             json.dump(data, levels)
             
             
