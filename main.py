@@ -268,7 +268,7 @@ async def on_message(message: Message):
     
     with open('levels.json', 'r+') as levels:
             data: dict = json.load(levels)
-            if 'txp' in data[message.author.name]:
+            if message.author.name in data and 'txp' in data[message.author.name]:
                 data[message.author.name]['txp'] += xp
             else:
                 data[message.author.name]['txp'] = data[message.author.name].get('txp', 0) + TXP
@@ -345,7 +345,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
         xp = round((time.time - VClevelsprogress[member.name]) / VCXPSECONDS)
         with open('levels.json', 'r+') as levels:
             data: dict = json.load(levels)
-            if 'vxp' in data[member.name]:
+            if member.name in data and 'vxp' in data[member.name]:
                 data[member.name]['vxp'] += xp
             else:
                 data[member.name]['vxp'] = data[member.name].get('vxp', 0) + xp
