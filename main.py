@@ -273,6 +273,7 @@ async def on_message(message: Message):
         else:
             data[message.author.name] = {}
             data[message.author.name]['txp'] = data[message.author.name].get('txp', 0) + TXP
+            data[message.author.name]['vxp'] = data[message.author.name].get('vxp', 0)
             
     with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'w') as levels:
         json.dump(data, levels)
@@ -352,6 +353,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
             else:
                 data[member.name] = {}
                 data[member.name]['vxp'] = data[member.name].get('vxp', 0) + xp
+                data[member.name]['txp'] = data[member.name].get('txp', 0)
 
         with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'w') as levels:
             json.dump(data, levels)
