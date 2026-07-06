@@ -266,15 +266,16 @@ async def on_message(message: Message):
     global bobmemory
     global msgauthorcache
     
-    with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r+') as levels:
-            data: dict = json.load(levels)
-            if message.author.name in data and 'txp' in data[message.author.name]:
-                data[message.author.name]['txp'] += TXP
-            else:
-                data[message.author.name] = {}
-                data[message.author.name]['txp'] = data[message.author.name].get('txp', 0) + TXP
-            levels.truncate(0)
-            json.dump(data, levels)
+    with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r') as levels:
+        data: dict = json.load(levels)
+        if message.author.name in data and 'txp' in data[message.author.name]:
+            data[message.author.name]['txp'] += TXP
+        else:
+            data[message.author.name] = {}
+            data[message.author.name]['txp'] = data[message.author.name].get('txp', 0) + TXP
+            
+    with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'w') as levels:
+        json.dump(data, levels)
 
     #return if bot sent the msg
     if message.author == client.user:
@@ -344,14 +345,15 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
 #person leaves vc, for leveling
     elif before.channel != None and after.channel == None:
         xp = round((time.time - VClevelsprogress[member.name]) / VCXPSECONDS)
-        with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r+') as levels:
+        with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r') as levels:
             data: dict = json.load(levels)
             if member.name in data and 'vxp' in data[member.name]:
                 data[member.name]['vxp'] += xp
             else:
                 data[member.name] = {}
                 data[member.name]['vxp'] = data[member.name].get('vxp', 0) + xp
-            levels.truncate(0)
+
+        with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r') as levels:
             json.dump(data, levels)
             
             
