@@ -96,6 +96,8 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 TEST_TOKEN = os.environ.get("TEST_TOKEN")
 YT_API_KEY = os.environ.get("YT_API_KEY")
 BOTNAME = 'Bob_'
+VCXPSECONDS: int = 300
+TXP = 1
 
 
 intents: Intents = Intents.all()
@@ -109,6 +111,7 @@ emojiList = [':mid:', ':bald:', ':hehe:', ':mods:', ':Jack:', ':hampter:']
 bobmemory = [{'role': 'system', 'content': prompt_mean_bob}]
 msgauthorcache: discord.Member = None
 task = None
+VClevelsprogress = {}
 
 
 
@@ -220,7 +223,6 @@ async def stopaudio(vc: discord.VoiceClient):
         print(e)
     return
     
-
 async def play_audio(vc: discord.VoiceClient, audio_url): #plays audio stream from url (only used for music via youtube search rn)
     # set FFmpeg options for streaming audio
     ffmpeg_options = {
@@ -255,7 +257,7 @@ async def queue_loop(vc: discord.VoiceClient, interaction: discord.Interaction):
         await stopaudio(vc)
         await queue_loop(vc, interaction)
 
-
+async def 
 
 
 #triggers when msg is sent
@@ -263,6 +265,16 @@ async def queue_loop(vc: discord.VoiceClient, interaction: discord.Interaction):
 async def on_message(message: Message):
     global bobmemory
     global msgauthorcache
+    
+    with open('levels.json', 'r+') as levels:
+            data: dict = json.load(levels)
+            if 'txp' in data[message.author.name]:
+                data[message.author.name]['txp'] += xp
+            else:
+                data[message.author.name]['txp'] = data[message.author.name].get('txp', 0) + TXP
+
+            json.dump(data, levels)
+
     #return if bot sent the msg
     if message.author == client.user:
         return
@@ -318,10 +330,32 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
     print('voicestate change detected')
     global q
     global task
+#clear q
     if member == client.user and after.channel == None:
         print('clearing q due to kicked from vc maybe idk')
         q.queuelist = []
         task.cancel()
+
+#person joins vc, for leveling
+    elif before.channel == None and after.channel != None:
+        if member.name in VClevelsprogress.items():
+            VClevelsprogress[member.name] = time.time
+#person leaves vc, for leveling
+    elif before.channel != None and after.channel == None:
+        xp = round((time.time - VClevelsprogress[member.name]) / VCXPSECONDS)
+        with open('levels.json', 'r+') as levels:
+            data: dict = json.load(levels)
+            if 'vxp' in data[member.name]:
+                data[member.name]['vxp'] += xp
+            else:
+                data[member.name]['vxp'] = data[member.name].get('vxp', 0) + xp
+
+            json.dump(data, levels)
+            
+            
+            
+        
+
 
 @client.event
 async def on_voice_channel_effect(effect: discord.VoiceChannelEffect):
@@ -420,7 +454,7 @@ async def monkey(interaction: discord.Interaction):
     await interaction.response.send_message(file=discord.File(open(f'{os.getcwd()}/monkey_song_1 (1).mp4', 'rb'), spoiler=False), tts=False)
 
 
-    
+   
     
 
 def main() -> None:
