@@ -257,7 +257,7 @@ async def queue_loop(vc: discord.VoiceClient, interaction: discord.Interaction):
         await stopaudio(vc)
         await queue_loop(vc, interaction)
 
-async def 
+
 
 
 #triggers when msg is sent
