@@ -273,7 +273,7 @@ async def on_message(message: Message):
             else:
                 data[message.author.name] = {}
                 data[message.author.name]['txp'] = data[message.author.name].get('txp', 0) + TXP
-
+            levels.write('')
             json.dump(data, levels)
 
     #return if bot sent the msg
@@ -351,7 +351,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
             else:
                 data[member.name] = {}
                 data[member.name]['vxp'] = data[member.name].get('vxp', 0) + xp
-
+            levels.write('')
             json.dump(data, levels)
             
             
