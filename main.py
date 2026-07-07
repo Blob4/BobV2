@@ -467,8 +467,8 @@ async def lvl(interaction: discord.Interaction, user: discord.Member):
     userdata = data[user.name]
     trank = 1
     vrank = 1
-    tlvl = math.floor(tlvl = int(userdata['txp']) / 100)
-    vlvl = math.floor(vlvl = int(userdata['vxp']) / 100)
+    tlvl = math.floor(int(userdata['txp']) / 100)
+    vlvl = math.floor(int(userdata['vxp']) / 100)
     for auramonster in data.keys():
         if data[auramonster]['txp'] > userdata['txp']:
             trank += 1
