@@ -474,7 +474,7 @@ async def lvl(interaction: discord.Interaction, user: discord.Member):
             trank += 1
         if data[auramonster]['vxp'] > userdata['vxp']:
             vrank += 1
-    format = f'Text LVL: {tlvl} (Rank {trank})\nVoice LVL: {vlvl} (Rank {vrank})'
+    format = f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}'
     print(format)
     await interaction.response.send_message(content=format, ephemeral=False)
 
