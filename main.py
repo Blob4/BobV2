@@ -459,6 +459,24 @@ i dont think this is necessary but i guess its here, empty for now because why n
 async def monkey(interaction: discord.Interaction):
     await interaction.response.send_message(file=discord.File(open(f'{os.getcwd()}/monkey_song_1 (1).mp4', 'rb'), spoiler=False), tts=False)
 
+@tree.command(name='level', description='shows text and vc xp')
+async def lvl(interaction: discord.Interaction, user: discord.Member):
+    with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r') as levels:
+        data: dict = json.load(levels)
+    userdata = data[user.name]
+    trank = 1
+    vrank = 1
+    tlvl = userdata['txp'] / 100
+    vlvl = userdata['vxp'] / 100
+    for user in data.keys():
+        if data[user]['txp'] > userdata['txp']:
+            trank += 1
+        if data[user]['vxp'] > userdata['vxp']:
+            vrank += 1
+    format = f'Text LVL: {tlvl} (Rank {trank})\nVoice LVL: {vlvl} (Rank {vrank})'
+    print(format)
+    await interaction.response.send_message(content=format, ephemeral=False)
+
 
    
     
