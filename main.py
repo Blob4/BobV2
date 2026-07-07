@@ -470,10 +470,11 @@ async def lvl(interaction: discord.Interaction, user: discord.Member):
         tlvl = math.floor(int(userdata['txp']) / 100)
         vlvl = math.floor(int(userdata['vxp']) / 100)
         for auramonster in data.keys():
-            if data[auramonster]['txp'] > userdata['txp']:
-                trank += 1
-            if data[auramonster]['vxp'] > userdata['vxp']:
-                vrank += 1
+            if 'txp' in data[auramonster] and 'txp' in userdata and 'vxp' in data[auramonster] and 'vxp' in userdata:
+                if data[auramonster]['txp'] > userdata['txp']:
+                    trank += 1
+                if data[auramonster]['vxp'] > userdata['vxp']:
+                    vrank += 1
         format = f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}'
         print(format)
         await interaction.response.send_message(content=format, ephemeral=False)
