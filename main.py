@@ -87,6 +87,7 @@ from googleapiclient.discovery import build
 import re
 from BobUtils import YoutubeUtils, Queue #my classes :D
 from random_unicode_emoji import random_emoji
+import math
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
@@ -466,12 +467,12 @@ async def lvl(interaction: discord.Interaction, user: discord.Member):
     userdata = data[user.name]
     trank = 1
     vrank = 1
-    tlvl = userdata['txp'] / 100
-    vlvl = userdata['vxp'] / 100
-    for user in data.keys():
-        if data[user]['txp'] > userdata['txp']:
+    math.floor(tlvl = userdata['txp'] / 100)
+    math.floor(vlvl = userdata['vxp'] / 100)
+    for auramonster in data.keys():
+        if data[auramonster]['txp'] > userdata['txp']:
             trank += 1
-        if data[user]['vxp'] > userdata['vxp']:
+        if data[auramonster]['vxp'] > userdata['vxp']:
             vrank += 1
     format = f'Text LVL: {tlvl} (Rank {trank})\nVoice LVL: {vlvl} (Rank {vrank})'
     print(format)
