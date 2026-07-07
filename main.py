@@ -464,19 +464,19 @@ async def monkey(interaction: discord.Interaction):
 async def lvl(interaction: discord.Interaction, user: discord.Member):
     with open('/home/leon/PythonScripts/BobV2/BobV2/levels.json', 'r') as levels:
         data: dict = json.load(levels)
-    userdata = data[user.name]
-    trank = 1
-    vrank = 1
-    tlvl = math.floor(int(userdata['txp']) / 100)
-    vlvl = math.floor(int(userdata['vxp']) / 100)
-    for auramonster in data.keys():
-        if data[auramonster]['txp'] > userdata['txp']:
-            trank += 1
-        if data[auramonster]['vxp'] > userdata['vxp']:
-            vrank += 1
-    format = f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}'
-    print(format)
-    await interaction.response.send_message(content=format, ephemeral=False)
+        userdata = data[user.name]
+        trank = 1
+        vrank = 1
+        tlvl = math.floor(int(userdata['txp']) / 100)
+        vlvl = math.floor(int(userdata['vxp']) / 100)
+        for auramonster in data.keys():
+            if data[auramonster]['txp'] > userdata['txp']:
+                trank += 1
+            if data[auramonster]['vxp'] > userdata['vxp']:
+                vrank += 1
+        format = f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}'
+        print(format)
+        await interaction.response.send_message(content=format, ephemeral=False)
 
 
    
