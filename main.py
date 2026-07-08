@@ -180,7 +180,14 @@ def get_response(message: Message, user_message: str, isGPT: bool):
 
 
 def findname(username: str, guild: discord.Guild):
-    return guild.get_member_named(username).display_name
+    auramonster = guild.get_member_named(username)
+
+    if auramonster != None:
+        return auramonster.display_name
+    else:
+        return username 
+
+
 
 #fucntion to retrieve a gif
 def retrieve_gif(message: Message, lmt): #this function is effectively a blackbox, all you need to know is that it returns the gif link and lmt is the number of gifs it looks through
