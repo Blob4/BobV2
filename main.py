@@ -529,14 +529,14 @@ async def leader(interaction: discord.Interaction):
         format.add_field(name='Text Leaderboard', value='\n', inline=False)
         format.add_field(name='Voice Leaderboard', value='\n', inline=True)
 
-        for auramonster in data.keys():
+        #for auramonster in data.keys():
 
-            trank = txps.index(txpsnamed[auramonster]) + 1
-            tranks[trank] = auramonster
+            #trank = txps.index(txpsnamed[auramonster]) + 1
+            #tranks[trank] = auramonster
             
 
-            vrank = vxps.index(vxpsnamed[auramonster]) + 1
-            vranks[vrank] = auramonster
+            #vrank = vxps.index(vxpsnamed[auramonster]) + 1
+            #vranks[vrank] = auramonster
 
         print(tranks)
         print(vranks)
