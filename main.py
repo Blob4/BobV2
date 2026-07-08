@@ -549,6 +549,7 @@ async def leader(interaction: discord.Interaction):
         #format.add_field(name=f'#{i+1}. {vusername}', value=f'LVL {vxp // 100} (Total XP: {vxp})', inline=True)
         format.add_field(name='Text Leaderboard', value=ttext, inline=False)
         format.add_field(name='Voice Leaderboard', value=vtext, inline=True)
+        await interaction.response.send_message(embed=format, ephemeral=False)
 
 
     
