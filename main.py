@@ -526,8 +526,8 @@ async def leader(interaction: discord.Interaction):
 
 
         format = discord.Embed(colour=discord.Color.gold(), title="Text & Voice Leaderboard", type='rich', description='')
-        format.add_field(name='Text Leaderboard', value='\n', inline=False)
-        format.add_field(name='Voice Leaderboard', value='\n', inline=True)
+        #format.add_field(name='Text Leaderboard', value='\n', inline=False)
+        #format.add_field(name='Voice Leaderboard', value='\n', inline=True)
 
         #for auramonster in data.keys():
 
@@ -547,7 +547,7 @@ async def leader(interaction: discord.Interaction):
             vtext += f'**#{i+1}. {vusername}**\nLVL {vxp // 100} (Total XP: {vxp})\n\n'
         #format.add_field(name=f'#{i+1}. {tusername}', value=f'LVL {txp // 100} (Total XP: {txp})', inline=False)
         #format.add_field(name=f'#{i+1}. {vusername}', value=f'LVL {vxp // 100} (Total XP: {vxp})', inline=True)
-        format.add_field(name='Text Leaderboard', value=ttext, inline=False)
+        format.add_field(name='Text Leaderboard', value=ttext, inline=True)
         format.add_field(name='Voice Leaderboard', value=vtext, inline=True)
         await interaction.response.send_message(embed=format, ephemeral=False)
 
