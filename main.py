@@ -478,7 +478,7 @@ async def lvl(interaction: discord.Interaction, user: discord.Member):
                     vrank += 1
         format = f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}'
         format = discord.Embed(colour=discord.Color.blurple(), title=f"{user.name}'s Rankings", type='rich', description=f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}')
-        format.add_field('user', 'e', False)
+        format.add_field(name='user', value='e', inline=False)
         print(format)
         await interaction.response.send_message(content='',embed=format, ephemeral=False)
 
