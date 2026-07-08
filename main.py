@@ -494,26 +494,37 @@ async def leader(interaction: discord.Interaction):
         vxpsnamed = {}
         tranks = {}
         vranks = {}
+        ttext = '\n'
+        vtext = '\n'
+
+        #for auramonster in data.keys():
+            #if 'txp' in data[auramonster]:
+                #txp = data[auramonster]['txp']
+            #else:
+                #txp = 0
+
+            #txps.append(txp)
+            #txpsnamed[auramonster] = txp
+
+            #if 'vxp' in data[auramonster]:
+                #vxp = data[auramonster]['vxp']
+            #else:
+                #vxp = 0
+            
+            #vxps.append(vxp)
+            #vxpsnamed[auramonster] = vxp
+        
+        #txps.sort(reverse=True)
+        #vxps.sort(reverse=True)
 
         for auramonster in data.keys():
-            if 'txp' in data[auramonster]:
-                txp = data[auramonster]['txp']
-            else:
-                txp = 0
+            txpsnamed[auramonster] = data[auramonster].get('txp', 0)
+            vxpsnamed[auramonster] = data[auramonster].get('vxp', 0)
 
-            txps.append(txp)
-            txpsnamed[auramonster] = txp
+        tranks = sorted(txpsnamed.items(), key=lambda x: x[1], reverse=True)
+        vranks = sorted(vxpsnamed.items(), key=lambda x: x[1], reverse=True)
 
-            if 'vxp' in data[auramonster]:
-                vxp = data[auramonster]['vxp']
-            else:
-                vxp = 0
-            
-            vxps.append(vxp)
-            vxpsnamed[auramonster] = vxp
-        
-        txps.sort(reverse=True)
-        vxps.sort(reverse=True)
+
         format = discord.Embed(colour=discord.Color.gold(), title="Text & Voice Leaderboard", type='rich', description='')
         format.add_field(name='Text Leaderboard', value='\n', inline=False)
         format.add_field(name='Voice Leaderboard', value='\n', inline=True)
@@ -530,11 +541,14 @@ async def leader(interaction: discord.Interaction):
         print(tranks)
         print(vranks)
         for i in range(len(data.keys())):
-            tusername = tranks[i+1]
-            vusername = vranks[i+1]
-            format.add_field(name=f'#{i+1}. {tusername}', value=f'LVL {math.floor(txpsnamed[tusername] / 100)} (Total XP: {txpsnamed[tusername]})', inline=False)
-            format.add_field(name=f'#{i+1}. {vusername}', value=f'LVL {math.floor(vxpsnamed[vusername] / 100)} (Total XP: {vxpsnamed[vusername]})', inline=True)
-
+            tusername, txp = tranks[i]
+            vusername, vxp = vranks[i]
+            ttext += f'**#{i+1}. {tusername}**\nLVL {txp // 100} (Total XP: {txp})\n\n'
+            vtext += f'**#{i+1}. {vusername}**\nLVL {vxp // 100} (Total XP: {vxp})\n\n'
+        #format.add_field(name=f'#{i+1}. {tusername}', value=f'LVL {txp // 100} (Total XP: {txp})', inline=False)
+        #format.add_field(name=f'#{i+1}. {vusername}', value=f'LVL {vxp // 100} (Total XP: {vxp})', inline=True)
+        format.add_field(name='Text Leaderboard', value=ttext, inline=False)
+        format.add_field(name='Voice Leaderboard', value=vtext, inline=True)
 
 
     
