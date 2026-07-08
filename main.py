@@ -522,11 +522,13 @@ async def leader(interaction: discord.Interaction):
 
             trank = txps.index(txp) + 1
             tranks[trank] = auramonster
+            
 
             vrank = vxps.index(vxp) + 1
             vranks[vrank] = auramonster
 
-
+        print(tranks)
+        print(vranks)
         for i in range(len(data.keys())):
             tusername = tranks[i+1]
             vusername = vranks[i+1]
