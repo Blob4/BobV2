@@ -477,7 +477,7 @@ async def lvl(interaction: discord.Interaction, user: discord.Member):
                 if data[auramonster]['vxp'] > userdata['vxp']:
                     vrank += 1
         format = f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}'
-        format = discord.Embed(colour=discord.Color.blurple(), title=f"{user.name}'s Rankings", type='rich', description=f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}')
+        format = discord.Embed(colour=discord.Color.blurple(), title=f"{user.name}'s Rankings", type='rich', description='')
         format.add_field(name=f'Text (Rank {trank})', value=f'LVL {tlvl} (Total XP: {userdata['txp']})', inline=True)
         format.add_field(name=f'Voice (Rank {vrank})', value=f'LVL {vlvl} (Total XP: {userdata['vxp']})', inline=True)
         print(format)
