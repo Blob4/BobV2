@@ -179,8 +179,8 @@ def get_response(message: Message, user_message: str, isGPT: bool):
 
 
 
-def findname(username: str):
-    return client.guilds[0].get_member_named(username).display_name
+def findname(username: str, guild: discord.Guild):
+    return guild.get_member_named(username).display_name
 
 #fucntion to retrieve a gif
 def retrieve_gif(message: Message, lmt): #this function is effectively a blackbox, all you need to know is that it returns the gif link and lmt is the number of gifs it looks through
@@ -544,8 +544,8 @@ async def leader(interaction: discord.Interaction):
         for i in range(len(data.keys())):
             tusername, txp = tranks[i]
             vusername, vxp = vranks[i]
-            ttext += f'**#{i+1}. {findname(tusername)}**\nLVL {txp // 100} (Total XP: {txp})\n\n'
-            vtext += f'**#{i+1}. {findname(vusername)}**\nLVL {vxp // 100} (Total XP: {vxp})\n\n'
+            ttext += f'**#{i+1}. {findname(tusername, interaction.guild)}**\nLVL {txp // 100} (Total XP: {txp})\n\n'
+            vtext += f'**#{i+1}. {findname(vusername, interaction.guild)}**\nLVL {vxp // 100} (Total XP: {vxp})\n\n'
         #format.add_field(name=f'#{i+1}. {tusername}', value=f'LVL {txp // 100} (Total XP: {txp})', inline=False)
         #format.add_field(name=f'#{i+1}. {vusername}', value=f'LVL {vxp // 100} (Total XP: {vxp})', inline=True)
         format.add_field(name='Text Leaderboard', value=ttext, inline=True)
