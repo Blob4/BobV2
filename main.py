@@ -520,11 +520,11 @@ async def leader(interaction: discord.Interaction):
 
         for auramonster in data.keys():
 
-            trank = txps.index(txp) + 1
+            trank = txps.index(txpsnamed[auramonster]) + 1
             tranks[trank] = auramonster
             
 
-            vrank = vxps.index(vxp) + 1
+            vrank = vxps.index(vxpsnamed[auramonster]) + 1
             vranks[vrank] = auramonster
 
         print(tranks)
