@@ -99,6 +99,7 @@ YT_API_KEY = os.environ.get("YT_API_KEY")
 BOTNAME = 'Bob_'
 VCXPSECONDS: int = 300
 TXP = 1
+LVLPATH = '/home/leon/PythonScripts/BobV2/BobV2/levels.json'
 
 
 intents: Intents = Intents.all()
@@ -477,11 +478,72 @@ async def lvl(interaction: discord.Interaction, user: discord.Member):
                 if data[auramonster]['vxp'] > userdata['vxp']:
                     vrank += 1
         format = f'Text LVL: {tlvl} (Total XP: {userdata['txp']})\n Rank {trank}\n\nVoice LVL: {vlvl} (Total XP: {userdata['vxp']}) \n Rank {vrank}'
-        format = discord.Embed(colour=discord.Color.blurple(), title=f"{user.name}'s Rankings", type='rich', description='')
+        format = discord.Embed(colour=discord.Color.gold(), title=f"{user.name}'s Rankings", type='rich', description='')
         format.add_field(name=f'Text (Rank {trank})', value=f'LVL {tlvl} (Total XP: {userdata['txp']})', inline=True)
         format.add_field(name=f'Voice (Rank {vrank})', value=f'LVL {vlvl} (Total XP: {userdata['vxp']})', inline=True)
         print(format)
         await interaction.response.send_message(content='',embed=format, ephemeral=False)
+
+@tree.command(name='leaderboard', description='shows txt and vc level leaderboard')
+async def leader(interaction: discord.Interaction):
+    with open(LVLPATH, 'r') as levels:
+        data: dict = json.load(levels)
+        txps = []
+        vxps = []
+        txpsnamed = {}
+        vxpsnamed = {}
+        tranks = {}
+        vranks = {}
+
+        for auramonster in data.keys():
+            if 'txp' in data[auramonster]:
+                txp = data[auramonster]['txp']
+            else:
+                txp = 0
+
+            txps.append(txp)
+            txpsnamed[auramonster] = txp
+
+            if 'vxp' in data[auramonster]:
+                vxp = data[auramonster]['vxp']
+            else:
+                vxp = 0
+            
+            vxps.append(vxp)
+            vxpsnamed[auramonster] = vxp
+        
+        txps.sort(reverse=True)
+        vxps.sort(reverse=True)
+        format = discord.Embed(colour=discord.Color.gold(), title="Text & Voice Leaderboard", type='rich', description='')
+        format.add_field(name='Text Leaderboard', value='\n', inline=False)
+        format.add_field(name='Voice Leaderboard', value='\n', inline=True)
+
+        for auramonster in data.keys():
+
+            trank = txps.index(txp) + 1
+            tranks[trank] = auramonster
+
+            vrank = vxps.index(vxp) + 1
+            vranks[vrank] = auramonster
+
+
+        for i in range(len(data.keys())):
+            tusername = tranks[i+1]
+            vusername = vranks[i+1]
+            format.add_field(name=f'#{i+1}. {tusername}', value=f'LVL {math.floor(txpsnamed[tusername] / 100)} (Total XP: {txpsnamed[tusername]})', inline=False)
+            format.add_field(name=f'#{i+1}. {vusername}', value=f'LVL {math.floor(vxpsnamed[vusername] / 100)} (Total XP: {vxpsnamed[vusername]})', inline=True)
+
+
+
+    
+
+            
+            
+
+            
+
+
+
 
 
    
